@@ -5,4 +5,4 @@ import Effect (Effect)
 import Effect.Console (log)
 
 main :: Effect Unit
-main = log "Hello sailor!"
+main = log "Hello, world!"
