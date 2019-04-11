@@ -27,3 +27,8 @@
         "release": "pulp --psc-package build -O --to bundle.js"
     }
     ```
+### Usage
+1. Download and install all project dependencies
+    ```
+    npm install
+    ```
