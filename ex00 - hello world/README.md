@@ -1,4 +1,5 @@
 ## Instructions
+### Setup
 1. Initialize npm
     ```
     npm init
@@ -12,3 +13,11 @@
     npx pulp --psc-package init
     ```
     *If you don't want unit testing you can remove the `./test` folder*
+1. Set up npm scripts in `package.json` for ease of use
+    ```json
+    "scripts": {
+        "postinstall": "psc-package install",
+        "build": "pulp --psc-package build",
+        "start": "pulp --psc-package run"
+    }
+    ```
