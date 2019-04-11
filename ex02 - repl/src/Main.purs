@@ -19,3 +19,6 @@ instance showFruit :: Show Fruit where
 h :: Fruit -> String
 h Orange = "orange!"
 h Banana = "yellow!"
+
+age :: Int
+age = 9
