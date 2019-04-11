@@ -4,7 +4,9 @@
     "description": "basic project setup",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "postinstall": "psc-package install",
+        "build": "pulp --psc-package build",
+        "start": "pulp --psc-package run"
     },
     "repository": {
         "type": "git",
