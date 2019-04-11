@@ -2,7 +2,6 @@
     "files.exclude": {
         "**/node_modules": true,
         "**/.psc*": true,
-        "**/.purs*": true,
         "**/.pulp*": true,
         "**/output": true,
         "**/package-lock.json": true

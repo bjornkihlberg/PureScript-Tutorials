@@ -5,6 +5,5 @@
 /generated-docs/
 /.psc-package/
 /.psc*
-/.purs*
 /.psa*
 **/bundle.js
