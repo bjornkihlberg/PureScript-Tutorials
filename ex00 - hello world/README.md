@@ -18,7 +18,9 @@ But let's look at the line above it:
 ```purescript
 main :: Effect Unit
 ```
-This is quite interesting. This it the type definition for `main`. It says that `main` has the type `Effect Unit`. What does that mean? It means that it has a side effect; it does something to the outside world (printing to the console in our case). Few languages track stuff like this. This is partly what makes a language like PureScript so fascinating because, as we'll see later, we can't cheat and mix side effects with pure code. That forces us to segregate the two worlds which helps us make more reusable and more reliable code.
+This is quite interesting. This it the type definition for `main`. It says that `main` has the type `Effect Unit`. What does that mean? It means that it has a
+[side effect](https://en.wikipedia.org/wiki/Side_effect_(computer_science))
+; it does something to the outside world (printing to the console in our case). Few languages track stuff like this. This is partly what makes a language like PureScript so fascinating because, as we'll see later, we can't cheat and mix side effects with pure code. That forces us to segregate the two worlds which helps us make more reusable and more reliable code.
 ## Instructions
 ### Setup
 1. Initialize npm

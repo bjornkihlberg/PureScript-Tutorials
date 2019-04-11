@@ -1,5 +1,5 @@
 ## Description
-### Simple unit testing example
+### Simple unit testing and [QuickCheck](https://en.wikipedia.org/wiki/QuickCheck) example
 A simple squaring function in `./src/Main.purs`
 ```purescript
 module Main where
@@ -33,11 +33,13 @@ squareTestSuite = suite "square" do
 main :: Effect Unit
 main = runTest squareTestSuite
 ```
-This should be quite explanatory. However, it is quite interesting that if you were to run these tests, they would all pass but they shouldn't. This tests whether `square x` is always larger than `0.0` which it isn't:
+This should be quite explanatory. However, it is quite interesting that if you were to run these tests, they would all pass but they shouldn't. This line tests whether `square x` is always larger than `0.0` which it isn't:
 ```purescript
 test "square x > 0" $ quickCheck (\ x -> square x > 0.0)
 ```
-This particular implementation of quickcheck doesn't seem to have a so called "shrinker" that tries "special" values like `0.0`. It is however possible to generate your own values but I'm not going to go through that in this tutorial.
+This
+[particular implementation of quickcheck](https://pursuit.purescript.org/packages/purescript-quickcheck/6.1.0/docs/Test.QuickCheck)
+doesn't seem to have a so called "shrinker" that tries "special" values like `0.0`. It is however possible to generate your own values but I'm not going to go through that in this tutorial.
 ## Instructions
 ### Setup
 1. Install unit testing package
