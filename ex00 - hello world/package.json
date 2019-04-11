@@ -1,0 +1,22 @@
+{
+  "name": "ex00_hello_world",
+  "version": "1.0.0",
+  "description": "basic project setup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjornkihlberg/PureScript-Tutorials.git"
+  },
+  "keywords": [
+    "purescript"
+  ],
+  "author": "bjorn.wilhelm.kihlberg@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjornkihlberg/PureScript-Tutorials/issues"
+  },
+  "homepage": "https://github.com/bjornkihlberg/PureScript-Tutorials#readme"
+}
