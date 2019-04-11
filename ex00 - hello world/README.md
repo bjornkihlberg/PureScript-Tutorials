@@ -1,3 +1,24 @@
+## Description
+### The canonical "hello world" console program
+```purescript
+module Main where
+
+import Prelude
+import Effect (Effect)
+import Effect.Console (log)
+
+main :: Effect Unit
+main = log "Hello, world!"
+```
+There isn't much to say about this. This is obviously what prints *Hello, world!* to the console:
+```purescript
+main = log "Hello, world!"
+```
+But let's look at the line above it:
+```purescript
+main :: Effect Unit
+```
+This is quite interesting. This it the type definition for `main`. It says that `main` has the type `Effect Unit`. What does that mean? It means that it has a side effect; it does something to the outside world (printing to the console in our case). Few languages track stuff like this. This is partly what makes a language like PureScript so fascinating because, as we'll see later, we can't cheat and mix side effects with pure code. That forces us to segregate the two worlds which helps us make more reusable and more reliable code.
 ## Instructions
 ### Setup
 1. Initialize npm
