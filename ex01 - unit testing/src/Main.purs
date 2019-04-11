@@ -2,5 +2,5 @@ module Main where
 
 import Prelude
 
-square :: Int -> Int
+square :: Number -> Number
 square x = x * x
