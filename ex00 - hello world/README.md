@@ -23,7 +23,6 @@
     "scripts": {
         "postinstall": "psc-package install",
         "build": "pulp --psc-package --watch build",
-        "start": "pulp --psc-package run",
         "release": "pulp --psc-package build -O --to bundle.js"
     }
     ```
