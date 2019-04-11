@@ -5,6 +5,7 @@
     "depends": [
         "console",
         "effect",
-        "prelude"
+        "prelude",
+        "test-unit"
     ]
 }
