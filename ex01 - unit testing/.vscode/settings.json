@@ -6,5 +6,7 @@
         "**/.pulp*": true,
         "**/output": true,
         "**/package-lock.json": true
-    }
+    },
+    "purescript.addPscPackageSources": true,
+    "purescript.addNpmPath": true
 }
