@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/.psc*": true,
+        "**/.pulp*": true,
+        "**/output": true,
+        "**/package-lock.json": true
+    },
+    "purescript.addPscPackageSources": true,
+    "purescript.addNpmPath": true
+}
