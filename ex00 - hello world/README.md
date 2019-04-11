@@ -31,3 +31,15 @@
     ```
     npm install
     ```
+1. Build project and watch for file changes during development
+    ```
+    npm run build
+    ```
+1. Compile and bundle to `./bundle.js` before running
+    ```
+    npm run release
+    ```
+1. Run application
+    ```
+    node bundle.js
+    ```
