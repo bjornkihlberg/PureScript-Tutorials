@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "postinstall": "psc-package install",
-        "repl": "pulp --psc-package repl"
+        "repl": "pulp --psc-package --watch repl"
     },
     "repository": {
         "type": "git",

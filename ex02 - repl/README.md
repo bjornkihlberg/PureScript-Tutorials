@@ -10,7 +10,7 @@
     ```json
     "scripts": {
         "postinstall": "psc-package install",
-        "repl": "pulp --psc-package repl"
+        "repl": "pulp --psc-package --watch repl"
     }
     ```
 1. Create a file `.purs-repl` to automatically import specified modules
