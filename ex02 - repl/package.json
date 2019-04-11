@@ -4,7 +4,8 @@
     "description": "basic project setup",
     "main": "index.js",
     "scripts": {
-        "postinstall": "psc-package install"
+        "postinstall": "psc-package install",
+        "repl": "pulp --psc-package repl"
     },
     "repository": {
         "type": "git",
