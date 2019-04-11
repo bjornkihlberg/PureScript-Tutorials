@@ -16,6 +16,7 @@
 1. Create a file `.purs-repl` to automatically import specified modules
     ```purescript
     import Prelude
+    import Main
     ```
 ### Usage
 1. Download and install all project dependencies
