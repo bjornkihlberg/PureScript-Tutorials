@@ -18,7 +18,7 @@
     ```
     npm install
     ```
-1. Run tests
+1. Compile project and run tests
     ```
     npm test
     ```
