@@ -1,5 +1,5 @@
 ## Description
-### Some [Category theory](https://en.wikipedia.org/wiki/Category_theory) as modelled in PureScript
+### Demonstrating the PureScript REPL
 ## Instructions
 ### Setup
 1. Install the psci-support module
