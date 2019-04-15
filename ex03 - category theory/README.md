@@ -1,8 +1,8 @@
 ## Description
 ### Some [Category theory](https://en.wikipedia.org/wiki/Category_theory) as modelled in PureScript
 I will not go into detail, only show some basic examples for each construct that interests me.
-#### [Functor](https://en.wikipedia.org/wiki/Functor)
-The Functor is modelled as a type class that implements `map` and that has to follow certain laws as described [here](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Functor#t:Functor).
+#### Functor
+The [Functor](https://en.wikipedia.org/wiki/Functor) is modelled as a type class that implements `map` and that has to follow certain laws as described [here](https://pursuit.purescript.org/packages/purescript-prelude/4.1.0/docs/Data.Functor#t:Functor).
 ```purescript
 class Functor f where
     map :: forall a b. (a -> b) -> f a -> f b
