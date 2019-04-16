@@ -17,7 +17,6 @@
 1. Create a file `.purs-repl` to automatically import specified modules
     ```purescript
     import Prelude
-    import Main
     import Data.Profunctor
     ```
 ### Usage
