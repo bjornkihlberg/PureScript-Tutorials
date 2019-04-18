@@ -6,3 +6,10 @@ Tutorials on using PureScript
 ```
 pulp --psc-package init
 ```
+### Show instance
+```purescript
+newtype Box a = Box a
+
+instance showBox :: (Show a) => Show (Box a) where
+    show (Box x) = "Box " <> (show x)
+```
