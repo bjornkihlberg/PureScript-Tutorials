@@ -37,3 +37,8 @@ f x = x { i = x.i + 1 }
 f :: forall a b. a -> b -> { x :: a, y :: b, z :: String }
 f = { x: _, y: _, z: "Hello" }
 ```
+
+```purescript
+f :: forall a b c. { x :: a | c } -> b -> { x :: b | c }
+f = _ { x = _ }
+```
