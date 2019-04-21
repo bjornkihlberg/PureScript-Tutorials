@@ -52,6 +52,51 @@ This is quite self explanatory. `view` obviously retrieves a value, `set` sets a
 (Tuple (Tuple 5 "Hi!") true)
 ```
 *Notice that `myTuple` remains unchanged!*
+
+We can create our own lenses from scratch for our own product types with the `lens` function.
+```purescript
+lens :: forall s t a b. (s -> a) (s -> b -> t) -> Lens s t a b
+```
+The idea here is that `lens` takes two arguments that define how to get and how to set values for a given type and returns a lens that points at that value.
+```purescript
+import Data.Lens (Lens, lens)
+
+type MyRecord = { x :: Int, y :: Boolean, z :: String }
+
+_X :: Lens MyRecord MyRecord Int Int
+_X = lens getter setter
+    where
+        getter :: MyRecord -> Int
+        getter = _.x
+        setter :: MyRecord -> Int -> MyRecord
+        setter = _ { x = _ }
+```
+We can now use our lens pointing at the `x` field in the `MyRecord` type.
+```
+> myRecord = { x: 5, y: true, z: "hello" }
+> view _X myRecord
+5
+
+> set _X 10 myRecord
+{ x: 10, y: true, z: "hello" }
+
+> over _X (_ * 3) myRecord
+{ x: 15, y: true, z: "hello" }
+```
+We can combine it with lenses for the `Tuple` type.
+```
+> myStructure = Tuple myRecord 3.14
+> myLens = _1 <<< _X
+> view myLens myStructure
+5
+
+> set myLens 10 myStructure
+(Tuple { x: 10, y: true, z: "hello" } 3.14)
+
+> over myLens (_ * 3) myStructure
+(Tuple { x: 15, y: true, z: "hello" } 3.14)
+```
+That is seriously awesome! Wow!
 ## Instructions
 ### Setup
 1. Install required packages
