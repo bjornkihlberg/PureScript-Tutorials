@@ -118,6 +118,7 @@ That is seriously awesome! Wow!
     import Main
     import Data.Lens
     import Data.Tuple
+    import Data.Map as Map
     ```
 ### Usage
 1. Download and install all project dependencies

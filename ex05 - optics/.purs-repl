@@ -2,3 +2,4 @@ import Prelude
 import Main
 import Data.Lens
 import Data.Tuple
+import Data.Map as Map
