@@ -42,3 +42,8 @@ f = { x: _, y: _, z: "Hello" }
 f :: forall a b c. { x :: a | c } -> b -> { x :: b | c }
 f = _ { x = _ }
 ```
+
+```purescript
+f :: forall a b. { x :: a | b } -> a
+f = _.x
+```
