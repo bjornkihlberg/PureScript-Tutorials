@@ -27,6 +27,31 @@ setX x a = a { b = a.b { x = x } }
 { b: { x: 3 } }
 ```
 The `setX` function also works as expected and might be fine for this simple example. However we can imagine it becoming unwieldy for more complicated cases where we might have lists, maps and/or sum types. The idea behind profunctor optics is that you compose "lenses" and "prisms" to "point" at something in a datastructure to conveniently manipulate it in a pure way. From here on we'll use the well designed [profunctor-lenses](https://pursuit.purescript.org/packages/purescript-profunctor-lenses/5.0.0) package to learn how to use optics in PureScript.
+#### Lens optics
+Let's start by taking a look at optics for product types like tuples and records. These optics are referred to as "lenses". The are already some lenses defined for the `Tuple` type in the `Data.Lens` module that are quite straight forward.
+```
+> import Data.Lens
+> import Data.Tuple
+> view _1 (Tuple "Hello" 5)
+"Hello"
+> set _1 "Yo" (Tuple "Hello" 5)
+(Tuple "Yo" 5)
+> over _2 (_ * 2) (Tuple "Hello" 5)
+(Tuple "Hello" 10)
+```
+This is quite self explanatory. `view` obviously retrieves a value, `set` sets a value (non-mutating ofcourse) and `over` maps a value. The `_1` and `_2` functions are the lenses that are pointing to the first or second value in the tuple. What's really cool is if we have a nested structure. We can compose the lenses to navigate into the nested structure.
+```
+> myTuple = Tuple (Tuple 5 "hello") true
+> myLens = _1 <<< _2
+> view myLens myTuple
+"hello"
+```
+`myLens` points at the position of the "hello" value in `myTuple`. We can set it to another value using the same lens.
+```
+> set myLens "Hi!" myTuple
+(Tuple (Tuple 5 "Hi!") true)
+```
+*Notice that `myTuple` remains unchanged!*
 ## Instructions
 ### Setup
 1. Install required packages
