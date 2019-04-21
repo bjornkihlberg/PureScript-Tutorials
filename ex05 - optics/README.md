@@ -1,6 +1,23 @@
 ## Description
 ### Profunctor optics
 The subject of optics or lenses is quite big. There is [a book](https://leanpub.com/lenses) on this subject. In this tutorial I will only show some basics. Optics seem quite easy to work with but a little bit more complicated to build from scratch. I'll try to summarise as best as I understand how this works.
+
+Working with deeply nested datastructures in FP can be difficult.
+```purescript
+type RecordA = { b :: RecordB }
+type RecordB = { x :: Int }
+```
+Retrieving the `x` field in a `RecordA` is not a huge problem.
+```purescript
+getX :: RecordA -> Int
+getX a = a.b.x
+```
+```
+> recordA = { b: { x: 10 } }
+> getX recordA
+10
+```
+The `getX` function works as expected. No problemo.
 ## Instructions
 ### Setup
 1. Install required modules
