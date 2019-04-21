@@ -32,8 +32,10 @@ Let's start by taking a look at optics for product types like tuples and records
 ```
 > view _1 (Tuple "Hello" 5)
 "Hello"
+
 > set _1 "Yo" (Tuple "Hello" 5)
 (Tuple "Yo" 5)
+
 > over _2 (_ * 2) (Tuple "Hello" 5)
 (Tuple "Hello" 10)
 ```
