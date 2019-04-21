@@ -2,11 +2,14 @@ module Main where
 
 import Prelude
 
-type RecordA = { b :: RecordB }
-type RecordB = { x :: Int }
+import Data.Lens (Lens, lens)
 
-getX :: RecordA -> Int
-getX a = a.b.x
+type MyRecord = { x :: Int, y :: Boolean, z :: String }
 
-setX :: Int -> RecordA -> RecordA
-setX x a = a { b = a.b { x = x } }
+_X :: Lens MyRecord MyRecord Int Int
+_X = lens getter setter
+    where
+        getter :: MyRecord -> Int
+        getter = _.x
+        setter :: MyRecord -> Int -> MyRecord
+        setter = _ { x = _ }
