@@ -1,5 +1,6 @@
 ## Description
 ### Profunctor optics
+The subject of optics or lenses is quite big. There is [a book](https://leanpub.com/lenses) on this subject. In this tutorial I will only show some basics. Optics seem quite easy to work with but a little bit more complicated to build from scratch. I'll try to summarise as best as I understand how this works.
 ## Instructions
 ### Setup
 1. Install required modules
