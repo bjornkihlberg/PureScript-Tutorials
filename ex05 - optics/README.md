@@ -30,8 +30,6 @@ The `setX` function also works as expected and might be fine for this simple exa
 #### Lens optics
 Let's start by taking a look at optics for product types like tuples and records. These optics are referred to as "lenses". The are already some lenses defined for the `Tuple` type in the `Data.Lens` module that are quite straight forward.
 ```
-> import Data.Lens
-> import Data.Tuple
 > view _1 (Tuple "Hello" 5)
 "Hello"
 > set _1 "Yo" (Tuple "Hello" 5)
@@ -71,6 +69,8 @@ This is quite self explanatory. `view` obviously retrieves a value, `set` sets a
     ```purescript
     import Prelude
     import Main
+    import Data.Lens
+    import Data.Tuple
     ```
 ### Usage
 1. Download and install all project dependencies
