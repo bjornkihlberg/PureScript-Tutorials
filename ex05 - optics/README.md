@@ -17,7 +17,16 @@ getX a = a.b.x
 > getX recordA
 10
 ```
-The `getX` function works as expected. No problemo.
+The `getX` function works as expected. No problemo. Things get slightly more complicated if we want to set the `x` field.
+```purescript
+setX :: Int -> RecordA -> RecordA
+setX x a = a { b = a.b { x = x } }
+```
+```
+> setX 3 recordA
+{ b: { x: 3 } }
+```
+The `setX` function also works as expected and might be fine for this simple example.
 ## Instructions
 ### Setup
 1. Install required modules
