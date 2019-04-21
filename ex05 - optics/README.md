@@ -26,7 +26,7 @@ setX x a = a { b = a.b { x = x } }
 > setX 3 recordA
 { b: { x: 3 } }
 ```
-The `setX` function also works as expected and might be fine for this simple example.
+The `setX` function also works as expected and might be fine for this simple example. However we can imagine it becoming unwieldy for more complicated cases where we might have lists, maps and/or sum types. The idea behind profunctor optics is that you compose "lenses" and "prisms" to "point" at something in a datastructure to conveniently manipulate it in a pure way. From here on we'll use the well designed [profunctor-lenses](https://pursuit.purescript.org/packages/purescript-profunctor-lenses/5.0.0) module to learn how to use optics in PureScript.
 ## Instructions
 ### Setup
 1. Install required modules
