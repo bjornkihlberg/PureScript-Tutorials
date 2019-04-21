@@ -1,8 +1,8 @@
 ## Description
 ### Profunctor optics
 The subject of optics or lenses is quite big. There is [a book](https://leanpub.com/lenses) on this subject. In this tutorial I will only show some basics. Optics seem quite easy to work with but a little bit more complicated to build from scratch. I'll try to summarise as best as I understand how this works.
-
-Working with deeply nested datastructures in FP can be difficult.
+#### Motivation
+Working with deeply nested datastructures in FP can be inconvenient.
 ```purescript
 type RecordA = { b :: RecordB }
 type RecordB = { x :: Int }
