@@ -71,6 +71,13 @@ _X = lens getter setter
         setter :: MyRecord -> Int -> MyRecord
         setter = _ { x = _ }
 ```
+This implementation makes things clear. A more simplified and more generic solution that works for any structure as long as it has an `x` field in it can be defined as well.
+```purescript
+import Data.Lens (Lens, lens)
+
+_X :: forall a b c. Lens { x :: a | c } { x :: b | c } a b
+_X = lens _.x $ _ { x = _ }
+```
 We can now use our lens pointing at the `x` field in the `MyRecord` type.
 ```
 > myRecord = { x: 5, y: true, z: "hello" }

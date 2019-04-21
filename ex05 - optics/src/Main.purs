@@ -4,7 +4,5 @@ import Prelude
 
 import Data.Lens (Lens, lens)
 
-type MyRecord = { x :: Int, y :: Boolean, z :: String }
-
-_X :: Lens MyRecord MyRecord Int Int
+_X :: forall a b c. Lens { x :: a | c } { x :: b | c } a b
 _X = lens _.x $ _ { x = _ }
