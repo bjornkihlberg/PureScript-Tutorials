@@ -104,6 +104,32 @@ We can combine it with lenses for the `Tuple` type.
 (Tuple { x: 15, y: true, z: "hello" } 3.14)
 ```
 That is seriously awesome! Wow!
+#### Maps
+This is quite straigth forward. We need access to the [Data.Maybe](https://pursuit.purescript.org/packages/purescript-maybe/4.0.1/docs/Data.Maybe) library because the lenses dealing with the [Data.Map](https://pursuit.purescript.org/packages/purescript-ordered-collections/1.6.1/docs/Data.Map) module are runtime safe.
+
+We use the `at` function to construct lenses to work with maps.
+```
+> mymap = Map.fromFoldable [Tuple "a" "A", Tuple "b" "B", Tuple "c" "C"]
+> mylens = at "b"
+> view mylens mymap
+(Just "B")
+```
+Ok. Nothing strange. If the `"b"` key weren't present we'd obviously get a `Nothing` back. We can insert values with `set` except we have to pass it a `Maybe` value.
+```
+> set mylens (Just "Beeee!") mymap
+(fromFoldable [(Tuple "a" "A"),(Tuple "b" "Beeee!"),(Tuple "c" "C")])
+```
+Alright. What happens if we pass it a `Nothing`?
+```
+> set mylens Nothing mymap
+(fromFoldable [(Tuple "a" "A"),(Tuple "c" "C")])
+```
+Interesting! The entry was removed! There is a convenient function `setJust` so we don't have to wrap the value in a `Just` when inserting or updating. What happens if we set a value for a key that doesn't exist?
+```
+> setJust (at "d") "D" mymap
+(fromFoldable [(Tuple "a" "A"),(Tuple "b" "B"),(Tuple "c" "C"),(Tuple "d" "D")])
+```
+I don't think there's much more to explore in terms of maps.
 ## Instructions
 ### Setup
 1. Install required packages
@@ -125,6 +151,7 @@ That is seriously awesome! Wow!
     import Main
     import Data.Lens
     import Data.Tuple
+    import Data.Maybe
     import Data.Map as Map
     ```
 ### Usage
