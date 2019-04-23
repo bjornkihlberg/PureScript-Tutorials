@@ -1,6 +1,6 @@
 ## Description
 ### Free Monads
-I'm going to keep this super simple. It has been a challenge to understand what free monads are because tutorials usually go through implementation of free monads from scratch by creating a kind of stream or they talk about the general case which is confusing. In this article, all I'm doing is showing a very simple example and then it will be probably be apparent how this can be used for other things as well. Using something gives an intuition, once you have an intuition, understanding the general case and implementation details might be easier and more interesting.
+I'm going to keep this super simple. It has been a challenge to understand what free monads are because tutorials usually go through implementation of free monads from scratch by creating a kind of stream or they talk about the general case which is confusing. In this article, all I'm doing is showing a very simple example and then it will be probably be apparent how this can be used for other things as well. Understanding the general case or implementation details might be easier and more interesting once you have an intuition.
 ## Instructions
 ### Setup
 1. Install required packages
