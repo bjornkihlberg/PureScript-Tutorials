@@ -14,7 +14,27 @@ instance functorMyADT :: Functor ConsoleIOF where
     map f (Print s a) = Print s (f a)
     map f (GetNumber g) = GetNumber (f <<< g)
 ```
-We got ourselves a new functor.
+We got ourselves a new functor. In theory we should be able to get a monad from that (for free). The `a` represents the type of the result of the program. In our case we will use `Unit` because we don't want to produce a result.
+```purescript
+type ConsoleIO = Free ConsoleIOF
+```
+Cool, now we can create some functions that return our new `ConsoleIO` monad.
+```purescript
+print :: String -> ConsoleIO Unit
+print s = liftF $ Print s unit
+
+getNumber :: ConsoleIO Int
+getNumber = liftF $ GetNumber identity
+```
+Now we can use these functions to produce a program.
+```purescript
+program :: ConsoleIO Unit
+program = do
+    print "Let's get a number!"
+    n <- getNumber
+    print $ "We got " <> show n
+```
+This "program" doesn't actually **do anything**. It just produces a stream that we can work with to make it **do something**.
 ## Instructions
 ### Setup
 1. Install required packages
