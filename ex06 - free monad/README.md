@@ -1,6 +1,20 @@
 ## Description
 ### Free Monads
 I'm going to keep this super simple. It has been a challenge to understand what free monads are because tutorials usually go through implementation of free monads from scratch by creating a kind of stream or they talk about the general case which is confusing. In this article, all I'm doing is showing a very simple example and then it will be probably be apparent how this can be used for other things as well. Understanding the general case or implementation details might be easier and more interesting once you have an intuition.
+
+The basic idea is that you may get a monad from any functor and that this monad only produces a structure that you can work with so you can defer the decision of what to do with it. For example you might want to do effects or maybe you want to automatically optimize the program or insert logging between every step, etc.
+
+We'll start by creating our own IO monad and defer the use of effects until later. That way we make our IO code testable. Let's go through my use case. We want to create an IO monad that can print to the console and get a number from somewhere (could be input from the console, in my example it will be a fixed number because reading from console in the browser is... not straight forward...).
+```purescript
+data ConsoleIOF a
+    = Print String a
+    | GetNumber (Int -> a)
+
+instance functorMyADT :: Functor ConsoleIOF where
+    map f (Print s a) = Print s (f a)
+    map f (GetNumber g) = GetNumber (f <<< g)
+```
+We got ourselves a new functor.
 ## Instructions
 ### Setup
 1. Install required packages
