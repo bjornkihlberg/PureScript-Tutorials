@@ -34,7 +34,28 @@ program = do
     n <- getNumber
     print $ "We got " <> show n
 ```
-This "program" doesn't actually **do anything**. It just produces a stream that we can work with to make it **do something**.
+This "program" doesn't actually **do anything**. It just produces a stream that we can work with to make it **do something**. Let's define how to turn our free monad program into a real effectful program.
+```purescript
+consoleIOToEffect :: ConsoleIO ~> Effect
+consoleIOToEffect = runFreeM $ case _ of
+    Print s a -> do
+        log s
+        pure a
+    GetNumber f -> pure (f 42)
+```
+Consider the type signature of `consoleIOToEffect :: ConsoleIO ~> Effect`. It turns our monad program into an effectful program. And we've defined that when we have a `Print` case, we log to the console and when we have a `GetNumber` case, we provide the integer value `42`.
+
+Finally we perform the transformation and run our program.
+```purescript
+main :: Effect Unit
+main = consoleIOToEffect program
+```
+This program yields the following console output.
+```
+Let's get a number!
+We got 42
+```
+A similar example made this finally click for me. It'd be interesting to explore from this point and see what else you can do with it! Hope this was useful!
 ## Instructions
 ### Setup
 1. Install required packages
