@@ -54,6 +54,18 @@ doC :: Int-> IxABC B C Int
 doC = (_ - 1) >>> IxABC
 ```
 `initA :: Int -> IxABC Void A Int` wraps an initial `Int` value in an `IxABC` and tags it with `A`. `doB :: Int -> IxABC A B Int` is tagged with `B` and can only follow an `IxABC` tagged with `A`. `doC :: Int-> IxABC B C Int` is tagged with `C` and can only follow an `IxABC` tagged with `B`.
+
+Finally, we can now compose these functions.
+```purescript
+myABC :: IxABC Void C Int
+myABC = initA 5 :>>= doB :>>= doC
+```
+*It's interesting to note that the type signature `myABC :: IxABC Void C Int` shows the starting point and the final point.*
+```
+> myABC
+IxABC (9)
+```
+We cannot compose these functions in any other way. It is ofcourse possible to set up much richer configurations as well with optional steps and cyclic steps etc. Anyway, cool stuff. Looking forward to experimenting with this more in the future!
 ## Instructions
 ### Setup
 1. Install required packages
