@@ -13,6 +13,14 @@ data B
 data C
 ```
 The idea is that we use these types to tag the IxABC monad with what state it is in so that they can only be composed in a certain order. In the signature for `IxABC i o a`, `i` represents the previous state, eg `A` and `o` represents the next state, eg `B` which means it could only be composed with another `IxABC` where its `i` is the same as the previous `o`. It's a little confusing but it will become clearer.
+
+Some convenience instances for `Show` and `Newtype`.
+```purescript
+derive instance newtypeIxABC :: Newtype (IxABC i o a) _
+
+instance showABC :: (Show a) => Show (IxABC i o a) where
+    show (IxABC x) = "IxABC (" <> show x <> ")"
+```
 ## Instructions
 ### Setup
 1. Install required packages
