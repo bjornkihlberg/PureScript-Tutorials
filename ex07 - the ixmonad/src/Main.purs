@@ -7,6 +7,10 @@ import Data.Newtype (class Newtype, unwrap)
 
 newtype IxABC i o a = IxABC a
 
+data A
+data B
+data C
+
 derive instance newtypeIxABC :: Newtype (IxABC i o a) _
 
 instance showABC :: (Show a) => Show (IxABC i o a) where
@@ -25,10 +29,6 @@ instance ixBindABC :: IxBind IxABC where
     ibind (IxABC x) f = (IxABC <<< unwrap) (f x)
 
 instance ixMonadABC :: IxMonad IxABC
-
-data A
-data B
-data C
 
 doA :: Int -> IxABC Void A Int
 doA = IxABC
