@@ -30,8 +30,8 @@ instance ixBindABC :: IxBind IxABC where
 
 instance ixMonadABC :: IxMonad IxABC
 
-doA :: Int -> IxABC Void A Int
-doA = IxABC
+initA :: Int -> IxABC Void A Int
+initA = IxABC
 
 doB :: Int -> IxABC A B Int
 doB = (_ * 2) >>> IxABC
@@ -40,4 +40,4 @@ doC :: Int-> IxABC B C Int
 doC = (_ - 1) >>> IxABC
 
 myABC :: IxABC Void C Int
-myABC = doA 5 :>>= doB :>>= doC
+myABC = initA 5 :>>= doB :>>= doC
