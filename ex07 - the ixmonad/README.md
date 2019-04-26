@@ -41,6 +41,19 @@ instance ixBindABC :: IxBind IxABC where
 instance ixMonadABC :: IxMonad IxABC
 ```
 *This is a little tedious but it seems like you have to create an instance for all the `IxMonad` superclasses rather than include their definitions in the `IxMonad` instance directly. Maybe it's possible and I'm too stupid!*
+
+Now we can define some operations and use our "tags" `A`, `B` and `C` to ensure that they can only be composed in the correct order!
+```purescript
+initA :: Int -> IxABC Void A Int
+initA = IxABC
+
+doB :: Int -> IxABC A B Int
+doB = (_ * 2) >>> IxABC
+
+doC :: Int-> IxABC B C Int
+doC = (_ - 1) >>> IxABC
+```
+`initA :: Int -> IxABC Void A Int` wraps an initial `Int` value in an `IxABC` and tags it with `A`. `doB :: Int -> IxABC A B Int` is tagged with `B` and can only follow an `IxABC` tagged with `A`. `doC :: Int-> IxABC B C Int` is tagged with `C` and can only follow an `IxABC` tagged with `B`.
 ## Instructions
 ### Setup
 1. Install required packages
