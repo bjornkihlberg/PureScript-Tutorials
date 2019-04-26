@@ -21,6 +21,26 @@ derive instance newtypeIxABC :: Newtype (IxABC i o a) _
 instance showABC :: (Show a) => Show (IxABC i o a) where
     show (IxABC x) = "IxABC (" <> show x <> ")"
 ```
+Followed by instance for `IxMonad` and its superclasses `IxBind`, `IxApplicative`, `IxApply` and `IxFunctor`.
+```purescript
+instance showABC :: (Show a) => Show (IxABC i o a) where
+    show (IxABC x) = "IxABC (" <> show x <> ")"
+
+instance ixFunctorABC :: IxFunctor IxABC where
+    imap f (IxABC x) = IxABC (f x)
+
+instance ixApplyABC :: IxApply IxABC where
+    iapply (IxABC f) (IxABC x) = IxABC (f x)
+
+instance ixApplicativeABC :: IxApplicative IxABC where
+    ipure = IxABC
+
+instance ixBindABC :: IxBind IxABC where
+    ibind (IxABC x) f = (IxABC <<< unwrap) (f x)
+
+instance ixMonadABC :: IxMonad IxABC
+```
+*This is a little tedious but it seems like you have to create an instance for all the `IxMonad` superclasses rather than include their definitions in the `IxMonad` instance directly. Maybe it's possible and I'm too stupid!*
 ## Instructions
 ### Setup
 1. Install required packages
