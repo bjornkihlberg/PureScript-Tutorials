@@ -14,7 +14,16 @@ We create a `State` with `state :: (s -> Tuple a s) -> State s a` (type signatur
 fastRandSt :: State Int Int
 fastRandSt = state (\seed -> let r = fastRand seed in Tuple r r)
 ```
-What's interesting is that the initial value of the computation is nowhere to be seen here.
+What's interesting is that the initial value of the computation is nowhere to be seen here. Here is a stateful computation that builds upon `fastRandSt`
+```purescript
+randomSum :: State Int Int
+randomSum = do
+    a <- fastRandSt
+    b <- fastRandSt
+    c <- fastRandSt
+    pure (a + b + c)
+```
+This code looks remarkably imperative but again, notice that the initial value is nowhere to be seen.
 ## Instructions
 ### Setup
 1. Install required packages
