@@ -1,5 +1,6 @@
 ## Description
 ### State Monad
+I think the State monad seems very contrived but maybe that's because I try to keep these examples small and this monad doesn't make much sense for simple stuff. Anyway, I've found a tolerable example to demonstrate how this monad work. The idea is that the monad holds a tuple representing a stateful value and a result.
 ## Instructions
 ### Setup
 1. Install required packages
