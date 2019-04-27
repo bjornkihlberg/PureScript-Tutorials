@@ -23,7 +23,12 @@ randomSum = do
     c <- fastRandSt
     pure (a + b + c)
 ```
-This code looks remarkably imperative but again, notice that the initial value is nowhere to be seen.
+This code looks remarkably imperative but again, notice that the initial value is nowhere to be seen. All of this is completely pure. In order to get the result we have to pass the computation to `evalState :: State s a -> s -> a` and as we can see in its signature, it needs an initial value to produce the result.
+```
+> evalState randomSum 1234
+6
+```
+I use `1234` as a random seed. If I were to run the computation multiple times, I get the same result back. This is why the `State` monad is actually pure. I don't think this example is perfect and this monad seems a little pointless except that it allows you to create a memory efficient solution for something that could otherwise be inefficient were you to use a stream or something.
 ## Instructions
 ### Setup
 1. Install required packages
