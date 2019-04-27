@@ -28,6 +28,8 @@ fastRand seed = (214013 * seed + 2531011) `shr` 16 .&. 5
     ```purescript
     import Prelude
     import Main
+    import Control.Monad.State
+    import Data.Int.Bits
     ```
 ### Usage
 1. Download and install all project dependencies
