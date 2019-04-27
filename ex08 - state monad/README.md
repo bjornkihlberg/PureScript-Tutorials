@@ -6,6 +6,7 @@
     ```
     npx psc-package install psci-support
     npx psc-package install transformers
+    npx psc-package install integers
     ```
 1. Set up npm scripts in `package.json` for ease of use
     ```json
