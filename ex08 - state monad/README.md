@@ -8,6 +8,13 @@ fastRand :: Int -> Int
 fastRand seed = (214013 * seed + 2531011) `shr` 16 .&. 5
 ```
 `fastRand` is pure so in order to get "random" numbers you pass its result back to it to ge the next "random" number. How it works isn't important because it sucks.
+
+We create a `State` with `state :: (s -> Tuple a s) -> State s a` (type signature is simplified and specialized for this example). The `s` represents the state of the monad and the `a` represents the result of the computation.
+```purescript
+fastRandSt :: State Int Int
+fastRandSt = state (\seed -> let r = fastRand seed in Tuple r r)
+```
+What's interesting is that the initial value of the computation is nowhere to be seen here.
 ## Instructions
 ### Setup
 1. Install required packages
