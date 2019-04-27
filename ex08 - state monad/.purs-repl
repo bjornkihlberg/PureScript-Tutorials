@@ -1,2 +1,4 @@
 import Prelude
 import Main
+import Control.Monad.State
+import Data.Int.Bits
