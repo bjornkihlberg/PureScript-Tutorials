@@ -1,5 +1,5 @@
 ## Description
-### HTML5 Canvas
+### Interacting with the browser
 ## Instructions
 ### Setup
 1. Install required packages
