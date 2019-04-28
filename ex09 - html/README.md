@@ -5,6 +5,7 @@
 1. Install required packages
     ```
     npx psc-package install psci-support
+    npx psc-package install web-html
     ```
 1. Set up npm scripts in `package.json` for ease of use
     ```json
