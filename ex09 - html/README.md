@@ -12,7 +12,8 @@
     "scripts": {
         "postinstall": "psc-package install",
         "repl": "pulp --psc-package --watch repl",
-        "build": "pulp --psc-package --watch build"
+        "build": "pulp --psc-package --watch build",
+        "bundle": "pulp --psc-package build --to bundle.js"
     }
     ```
 1. Create a file `.purs-repl` to automatically import specified modules
