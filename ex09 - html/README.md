@@ -1,5 +1,22 @@
 ## Description
 ### Interacting with the browser
+#### Bundling
+To start off we create regular old *index.html* with a `script` tag referring to *bundle.js*.
+```html
+<body>
+    <script src="bundle.js"></script>
+</body>
+```
+We bundle our application into the same folder as *index.html* and name it *bundle.js*.
+```
+pulp --psc-package build --to bundle.js
+```
+This command minifies the output and only includes what's necessary from the PureScript packages. Default behaviour is for the entrypoint `main :: Effect Unit` automatically be invoked when the script is loaded. It's possible to disable this but I keep it on for now.
+```purescript
+main :: Effect Unit
+main = Console.log "Hello, world!"
+```
+*This will cause the browser to present `Hello, world!` in the console when loading index.html*
 ## Instructions
 ### Setup
 1. Install required packages
