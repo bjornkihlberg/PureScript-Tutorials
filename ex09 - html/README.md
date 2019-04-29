@@ -174,13 +174,17 @@ Terrible. But it works! Clicking the button in the ui causes the browser to pres
     myButtonNode <- window >>= document <#> toNonElementParentNode
     maybeMyButtonElement <- getElementById "mybutton" myButtonNode
     ```
-1. That should probably be put into its own function
+    can be turned into
+    ```purescript
+    maybeMyButtonElement <- window >>= document <#> toNonElementParentNode >>= getElementById "mybutton"
+    ```
+    That should probably be put into its own function
     ```purescript
     documentGetElementById :: String -> Effect (Maybe Element)
     documentGetElementById id =
         window >>= document <#> toNonElementParentNode >>= getElementById id
     ```
-    and referred in `main`.
+    and referred in `main` like this.
     ```purescript
     maybeMyButtonElement <- documentGetElementById "mybutton"
     ```
