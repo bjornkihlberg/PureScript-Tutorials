@@ -2,7 +2,7 @@ module Main where
 
 import Prelude
 
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe, maybe)
 import Effect (Effect)
 import Effect.Console (log)
 import Web.DOM (Element)
@@ -21,8 +21,8 @@ documentGetElementById id =
 main :: Effect Unit
 main = do
     maybeMyButtonElement <- documentGetElementById "mybutton"
-    case maybeMyButtonElement >>= fromElement <#> toEventTarget of
-        Nothing -> log "given element could not be found or it was not a button"
-        Just myButtonEventTarget -> do
-            myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
-            addEventListener click myButtonClickEvent false myButtonEventTarget
+    myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
+    maybe
+        (log "given element could not be found or it was not a button")
+        (addEventListener click myButtonClickEvent false)
+        (maybeMyButtonElement >>= fromElement <#> toEventTarget)
