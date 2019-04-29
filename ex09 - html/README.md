@@ -24,6 +24,20 @@ main :: Effect Unit
 main = Console.log "Hello, world!"
 ```
 *This will cause the browser to present `Hello, world!` in the console when loading index.html*
+#### window, document, etc
+We use the [web-html](https://pursuit.purescript.org/packages/purescript-web-html/2.0.1) package to do basic operations with the browser. Interacting with the `window` object and the DOM are effectful operations and need to be performed in a monadic `Effect` context. For example, to get the window object we invoke `window :: Effect Window` and to make an alert we invoke `alert :: String ->  Window -> Effect Unit`.
+```purescript
+main :: Effect Unit
+main = do
+    w <- window
+    alert "Hello, world!" w
+```
+*Since Effect is a monad the above code can be refactored with `>>=`*
+```purescript
+main :: Effect Unit
+main = window >>= alert "Hello, world!"
+```
+*This is called "point free style" because we just pipe the results through our functions without using temporary variables like `w`*
 ## Instructions
 ### Setup
 1. Install required packages
