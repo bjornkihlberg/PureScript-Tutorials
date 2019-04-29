@@ -3,7 +3,8 @@ module Main where
 import Prelude
 
 import Effect (Effect)
-import Effect.Console as Console
+import Web.HTML (window)
+import Web.HTML.Window (alert)
 
 main :: Effect Unit
-main = Console.log "Hello, world!"
+main = window >>= alert "Hello, world!"
