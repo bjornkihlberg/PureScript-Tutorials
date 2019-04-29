@@ -164,7 +164,9 @@ Terrible. But it works! Clicking the button in the ui causes the browser to pres
     w <- window
     d <- document w
     let myButtonNode = toNonElementParentNode d
-    -- can be turned into
+    ```
+    can be turned into
+    ```purescript
     myButtonNode <- window >>= document <#> toNonElementParentNode
     ```
 1. Since `myButtonNode` is only used once, we can simplify further.
@@ -189,7 +191,9 @@ Terrible. But it works! Clicking the button in the ui causes the browser to pres
         Just myButtonElement -> 
             case fromElement myButtonElement of
                 Nothing -> log "given element was not a button"
-    -- can be turned into
+    ```
+    can be turned into
+    ```purescript
     case maybeMyButtonElement >>= fromElement of
         Nothing -> log "given element could not be found or it was not a button"
     ```
@@ -199,10 +203,12 @@ Terrible. But it works! Clicking the button in the ui causes the browser to pres
         Nothing -> log "given element could not be found or it was not a button"
         Just myButton -> do
             let myButtonEventTarget = toEventTarget myButton
-    -- can be turned into
+    ```
+    can be turned into
+    ```purescript
     case maybeMyButtonElement >>= fromElement <#> toEventTarget of
         Nothing -> log "given element could not be found or it was not a button"
-        Just myButtonEventTarget -> -- do stuff
+        Just myButtonEventTarget ->
     ```
 1. `eventListener` doesn't depend on the previous results and can be moved outside the case expression into the main `do` body.
     ```purescript
@@ -215,7 +221,9 @@ Terrible. But it works! Clicking the button in the ui causes the browser to pres
         Nothing -> log "given element could not be found or it was not a button"
         Just myButtonEventTarget -> do
             addEventListener click myButtonClickEvent false myButtonEventTarget
-    -- can be turned into
+    ```
+    can be turned into
+    ```purescript
     myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
     maybe
         (log "given element could not be found or it was not a button")
