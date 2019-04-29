@@ -11,7 +11,7 @@ We bundle our application into the same folder as *index.html* and name it *bund
 ```
 pulp --psc-package --watch build --to bundle.js
 ```
-This command minifies the output and only includes what's necessary from the PureScript packages as well as recompiles when there are changes to the source code. Default behaviour is for the entrypoint `main :: Effect Unit` automatically be invoked when the script is loaded. It's possible to disable this but I keep it on for now.
+This command minifies the output and only includes what's necessary from the PureScript packages as well as recompiles when there are changes to the source code. Default behaviour is for the entrypoint `main :: Effect Unit` to automatically be invoked when the script is loaded. It's possible to disable this but I keep it on for now.
 ```purescript
 module Main where
 
@@ -74,7 +74,7 @@ Let's walk through this step by step.
     -- from module Web.DOM.NonElementParentNode
     getElementById :: String -> NonElementParentNode -> Effect (Maybe Element)
     ```
-1. Presumably we need something to convert `Document` to `NonElementParentNode`
+1. Presumably we need something to convert `HTMLDocument` to `NonElementParentNode`
     ```purescript
     -- from module Web.HTML.HTMLDocument
     toNonElementParentNode :: HTMLDocument -> NonElementParentNode
