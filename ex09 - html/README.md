@@ -13,6 +13,13 @@ pulp --psc-package build --to bundle.js
 ```
 This command minifies the output and only includes what's necessary from the PureScript packages. Default behaviour is for the entrypoint `main :: Effect Unit` automatically be invoked when the script is loaded. It's possible to disable this but I keep it on for now.
 ```purescript
+module Main where
+
+import Prelude
+
+import Effect (Effect)
+import Effect.Console as Console
+
 main :: Effect Unit
 main = Console.log "Hello, world!"
 ```
