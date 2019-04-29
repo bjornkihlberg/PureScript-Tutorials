@@ -158,7 +158,102 @@ main = do
                     myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
                     addEventListener click myButtonClickEvent false myButtonEventTarget
 ```
-Terrible. But it works! Clicking the button in the ui causes the browser to present `You clicked!` in the console.
+Terrible. But it works! Clicking the button in the ui causes the browser to present `You clicked!` in the console. But let's clean this mess up, step by step.
+1. `w` and `d` are only used once so we can do the following simplification.
+    ```purescript
+    w <- window
+    d <- document w
+    let myButtonNode = toNonElementParentNode d
+    -- can be turned into
+    myButtonNode <- window >>= document <#> toNonElementParentNode
+    ```
+1. Since `myButtonNode` is only used once, we can simplify further.
+    ```purescript
+    myButtonNode <- window >>= document <#> toNonElementParentNode
+    maybeMyButtonElement <- getElementById "mybutton" myButtonNode
+    ```
+1. That should probably be put into its own function
+    ```purescript
+    documentGetElementById :: String -> Effect (Maybe Element)
+    documentGetElementById id =
+        window >>= document <#> toNonElementParentNode >>= getElementById id
+    ```
+    and referred in `main`.
+    ```purescript
+    maybeMyButtonElement <- documentGetElementById "mybutton"
+    ```
+1. We can simplify the `Maybe` logic with `>>=` if we're willing to give up the logs indicating what exactly went wrong. I am in this case!
+    ```purescript
+    case maybeMyButtonElement of
+        Nothing -> log "could not find element by given id"
+        Just myButtonElement -> 
+            case fromElement myButtonElement of
+                Nothing -> log "given element was not a button"
+    -- can be turned into
+    case maybeMyButtonElement >>= fromElement of
+        Nothing -> log "given element could not be found or it was not a button"
+    ```
+1. Since `myButton` is only used once and directly mapped with `toEventTarget` we can simplify this even further.
+    ```purescript
+    case maybeMyButtonElement >>= fromElement of
+        Nothing -> log "given element could not be found or it was not a button"
+        Just myButton -> do
+            let myButtonEventTarget = toEventTarget myButton
+    -- can be turned into
+    case maybeMyButtonElement >>= fromElement <#> toEventTarget of
+        Nothing -> log "given element could not be found or it was not a button"
+        Just myButtonEventTarget -> -- do stuff
+    ```
+1. `eventListener` doesn't depend on the previous results and can be moved outside the case expression into the main `do` body.
+    ```purescript
+    myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
+    ```
+1. What we're left with can be simplified with the function `maybe :: forall a b. b -> (a -> b) -> Maybe a -> b`
+    ```purescript
+    myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
+    case maybeMyButtonElement >>= fromElement <#> toEventTarget of
+        Nothing -> log "given element could not be found or it was not a button"
+        Just myButtonEventTarget -> do
+            addEventListener click myButtonClickEvent false myButtonEventTarget
+    -- can be turned into
+    myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
+    maybe
+        (log "given element could not be found or it was not a button")
+        (addEventListener click myButtonClickEvent false)
+        (maybeMyButtonElement >>= fromElement <#> toEventTarget)
+    ```
+Finally we end up with this. A lot more neat and concise!
+```purescript
+module Main where
+
+import Prelude
+
+import Data.Maybe (Maybe, maybe)
+import Effect (Effect)
+import Effect.Console (log)
+import Web.DOM (Element)
+import Web.DOM.NonElementParentNode (getElementById)
+import Web.Event.EventTarget (addEventListener, eventListener)
+import Web.HTML (window)
+import Web.HTML.Event.EventTypes (click)
+import Web.HTML.HTMLButtonElement (fromElement, toEventTarget)
+import Web.HTML.HTMLDocument (toNonElementParentNode)
+import Web.HTML.Window (document)
+
+documentGetElementById :: String -> Effect (Maybe Element)
+documentGetElementById id =
+    window >>= document <#> toNonElementParentNode >>= getElementById id
+
+main :: Effect Unit
+main = do
+    maybeMyButtonElement <- documentGetElementById "mybutton"
+    myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
+    maybe
+        (log "given element could not be found or it was not a button")
+        (addEventListener click myButtonClickEvent false)
+        (maybeMyButtonElement >>= fromElement <#> toEventTarget)
+```
+That's decent! Gives a clear overview of what's going on! The type system helped me every step of the way. Very cool!
 ## Instructions
 ### Setup
 1. Install required packages
