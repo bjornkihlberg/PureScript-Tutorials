@@ -6,6 +6,7 @@
     ```
     npx psc-package install console
     npx psc-package install web-html
+    npx psc-package install canvas
     ```
 1. Set up npm scripts in `package.json` for ease of use
     ```json
