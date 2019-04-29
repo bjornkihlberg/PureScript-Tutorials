@@ -3,8 +3,8 @@
     "set": "psc-0.12.4",
     "source": "https://github.com/purescript/package-sets.git",
     "depends": [
+        "console",
         "prelude",
-        "psci-support",
         "web-html"
     ]
 }

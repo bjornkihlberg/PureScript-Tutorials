@@ -21,7 +21,7 @@ documentGetElementById id =
 main :: Effect Unit
 main = do
     maybeMyButtonElement <- documentGetElementById "mybutton"
-    myButtonClickEvent <- eventListener (\_ -> log "You clicked!")
+    myButtonClickEvent <- eventListener (\_ -> log "You clickedz!")
     maybe
         (log "given element could not be found or it was not a button")
         (addEventListener click myButtonClickEvent false)
