@@ -74,15 +74,15 @@ Let's walk through this step by step.
     -- from module Web.DOM.NonElementParentNode
     getElementById :: String -> NonElementParentNode -> Effect (Maybe Element)
     ```
-1. Presumably we need something to convert `HTMLDocument` to `NonElementParentNode`
-    ```purescript
-    -- from module Web.HTML.HTMLDocument
-    toNonElementParentNode :: HTMLDocument -> NonElementParentNode
-    ```
-1. Now we can get an `HTMLButtonElement`
+1. Presumably we need access to `HTMLDocument` and to convert it to `NonElementParentNode`
     ```purescript
     -- from module Web.HTML.Window
     document :: Window -> Effect HTMLDocument
+    -- from module Web.HTML.HTMLDocument
+    toNonElementParentNode :: HTMLDocument -> NonElementParentNode
+    ```
+1. Now we can finally get `HTMLButtonElement`
+    ```purescript
     -- from module Web.HTML.HTMLButtonElement
     fromElement :: Element -> Maybe HTMLButtonElement
     ```
