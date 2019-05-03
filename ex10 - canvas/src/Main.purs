@@ -22,7 +22,7 @@ paintShip ctx turns x y = do
     setFillStyle ctx "#FF0000"
     fill ctx
     beginPath ctx
-    setTransform ctx { m11: 1.0, m12: 0.0, m21: 0.0, m22: 1.0, m31: 0.0, m32: 0.0}
+    setTransform ctx { m11: 1.0, m12: 0.0, m21: 0.0, m22: 1.0, m31: 0.0, m32: 0.0 }
 
 main :: Effect Unit
 main = do
@@ -33,4 +33,4 @@ main = do
             { width, height } <- getCanvasDimensions canvas
             ctx <- getContext2D canvas
             clearRect ctx { x: 0.0, y: 0.0, width, height }
-            paintShip ctx 0.5 50.0 100.0
+            paintShip ctx 0.1 170.0 100.0
