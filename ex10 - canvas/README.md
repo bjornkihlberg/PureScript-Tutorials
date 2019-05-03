@@ -39,6 +39,25 @@ Just canvas -> do
     ctx <- getContext2D canvas
     paintShip ctx 0.1 170.0 100.0
 ```
+What is `paintShip :: Context2D -> Number -> Number -> Number -> Effect Unit`? It's a function that draws a little spaceship. I will not go into details because all you need to do is study the HTML5 Canvas API and you will understand what this stuff does. It's a very 1:1 interface to equivalent JavaScript implementation.
+```purescript
+paintShip :: Context2D -> Number -> Number -> Number -> Effect Unit
+paintShip ctx turns x y = do
+    translate ctx { translateX: x, translateY: y }
+    rotate ctx (turns * 2.0 * pi)
+    beginPath ctx
+    moveTo ctx 0.0 10.0
+    lineTo ctx (-5.0) (-5.0)
+    lineTo ctx 0.0 (-1.0)
+    lineTo ctx 5.0 (-5.0)
+    lineTo ctx 0.0 10.0
+    stroke ctx
+    setFillStyle ctx "#FF0000"
+    fill ctx
+    beginPath ctx
+    setTransform ctx { m11: 1.0, m12: 0.0, m21: 0.0, m22: 1.0, m31: 0.0, m32: 0.0 }
+```
+*Basically it draws a red little spaceship, rotated and positioned at given screen space coordinates.*
 ## Instructions
 ### Setup
 1. Install required packages
