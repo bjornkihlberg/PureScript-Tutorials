@@ -58,6 +58,18 @@ paintShip ctx turns x y = do
     setTransform ctx { m11: 1.0, m12: 0.0, m21: 0.0, m22: 1.0, m31: 0.0, m32: 0.0 }
 ```
 *Basically it draws a red little spaceship, rotated and positioned at given screen space coordinates.*
+
+I've also implemented a function for clearing the screen which is not useful for this tutorial but I wanted to include it because I think it helps us understand how we think about working with the `canvas` reference in PureScript. *You can skip this bit if you like.*
+
+We use `clearRect :: Context2D -> Rectangle -> Effect Unit` to clear the canvas in the specified rectangle area using a `type Rectangle = { x :: Number, y :: Number, width :: Number, height :: Number }` where `x` and `y` are the positions for the rectangle top left corner and `width` and `height` should be self explanatory. So we need the width and height of the canvas to clear all of it. To get the width and height we use `getCanvasDimensions :: CanvasElement -> Effect Dimensions`. The `type Dimensions = { width :: Number, height :: Number }` contains our desired canvas width and height.
+```purescript
+Just canvas -> do
+    { width, height } <- getCanvasDimensions canvas
+    ctx <- getContext2D canvas
+    clearRect ctx { x: 0.0, y: 0.0, width, height }
+    paintShip ctx 0.1 170.0 100.0
+```
+*I clear before drawing which isn't necessary because we only draw once but I wanted to include this anyway.*
 ## Instructions
 ### Setup
 1. Install required packages
