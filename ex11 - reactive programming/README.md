@@ -6,6 +6,7 @@
     ```
     npx psc-package install web-uievents
     npx psc-package install console
+    npx psc-package install event
     ```
 1. Set up npm scripts in `package.json` for ease of use
     ```json
