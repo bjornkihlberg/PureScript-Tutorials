@@ -123,7 +123,7 @@ main = do
             clearRect ctx { x: 0.0, y: 0.0, width, height }
             paintShip ctx 0.1 170.0 100.0
 ```
-*All I did was use `>>=` to avoid shadowing `canvas`.*
+*All I did was use `>>=` to avoid shadowing `canvas`. I'm keeping the rest as-is for now to keep things clear and readable.*
 ## Instructions
 ### Setup
 1. Install required packages
