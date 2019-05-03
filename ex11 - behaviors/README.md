@@ -4,6 +4,7 @@
 ### Setup
 1. Install required packages
     ```
+    npx psc-package install effect
     npx psc-package install behaviors
     ```
 1. Set up npm scripts in `package.json` for ease of use
