@@ -1,6 +1,6 @@
 ## Description
 ### Canvas
-We're producing this result with [HTML5 Canvas](https://www.w3schools.com/html/html5_canvas.asp).
+We're producing this result with [HTML5 Canvas](https://www.w3schools.com/html/html5_canvas.asp) and the [Graphics.Canvas](https://pursuit.purescript.org/packages/purescript-canvas/4.0.0/docs/Graphics.Canvas) module.
 
 ![canvas01](https://user-images.githubusercontent.com/38290734/57141313-2eeadf80-6dba-11e9-8d24-ca4d3e78e55b.png)
 
