@@ -26,8 +26,8 @@ paintShip ctx turns x y = do
 
 main :: Effect Unit
 main = do
-    canvas <- getCanvasElementById "mycanvas"
-    case canvas of
+    getCanvasElementById "mycanvas"
+    >>= case _ of
         Nothing -> log "Couldn't find canvas by id"
         Just canvas -> do
             { width, height } <- getCanvasDimensions canvas
