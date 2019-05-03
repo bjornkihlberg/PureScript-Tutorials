@@ -24,6 +24,21 @@ main = do
     pure unit
 ```
 *We invoke `pure unit` to make the code compile and allow us to build our code gradually. We will not include this line in the final result.*
+
+Since `getCanvasElementById` returns a `Maybe` we need to match on the result.
+```purescript
+case canvas of
+    Nothing -> log "Couldn't find canvas by id"
+    Just canvas -> do
+```
+*I shadow the `canvas` name because I don't need the previous `canvas` reference any more. This could be cleaned up later using the `maybe :: forall a b. b -> (a -> b) -> Maybe a -> b`*
+
+Next up we get the 2D rendering context so we can [draw stuff](https://www.w3schools.com/graphics/canvas_drawing.asp).
+```purescript
+Just canvas -> do
+    ctx <- getContext2D canvas
+    paintShip ctx 0.1 170.0 100.0
+```
 ## Instructions
 ### Setup
 1. Install required packages
