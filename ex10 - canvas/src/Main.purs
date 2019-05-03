@@ -9,9 +9,9 @@ import Graphics.Canvas (Context2D, beginPath, clearRect, fill, getCanvasDimensio
 import Math (pi)
 
 paintShip :: Context2D -> Number -> Number -> Number -> Effect Unit
-paintShip ctx r x y = do
+paintShip ctx turns x y = do
     translate ctx { translateX: x, translateY: y }
-    rotate ctx (r * 2.0 * pi)
+    rotate ctx (turns * 2.0 * pi)
     beginPath ctx
     moveTo ctx 0.0 10.0
     lineTo ctx (-5.0) (-5.0)
