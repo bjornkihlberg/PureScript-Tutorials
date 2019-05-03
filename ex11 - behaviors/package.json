@@ -1,0 +1,28 @@
+{
+    "name": "ex00_hello_world",
+    "version": "1.0.0",
+    "description": "basic project setup",
+    "main": "index.js",
+    "scripts": {
+        "postinstall": "psc-package install",
+        "build": "pulp --psc-package --watch build --to bundle.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bjornkihlberg/PureScript-Tutorials.git"
+    },
+    "keywords": [
+        "purescript"
+    ],
+    "author": "bjorn.wilhelm.kihlberg@gmail.com",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/bjornkihlberg/PureScript-Tutorials/issues"
+    },
+    "homepage": "https://github.com/bjornkihlberg/PureScript-Tutorials#readme",
+    "devDependencies": {
+        "psc-package": "^3.0.1",
+        "pulp": "^12.4.0",
+        "purescript": "^0.12.4"
+    }
+}
