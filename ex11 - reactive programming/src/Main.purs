@@ -18,15 +18,15 @@ import Web.UIEvent.KeyboardEvent.EventTypes (keydown, keyup)
 
 main :: Effect Unit
 main = do
-    { event: keyPresses, push: pressKey } <- create
+    { event, push } <- create
     
-    onKeyDownEvent <- eventListener $ onKey $ Right >>> pressKey
-    onKeyUpEvent   <- eventListener $ onKey $ Left  >>> pressKey
+    onKeyDownEvent <- eventListener $ onKey (Right >>> push)
+    onKeyUpEvent   <- eventListener $ onKey (Left  >>> push)
 
     window <#> toEventTarget >>= addEventListener keydown onKeyDownEvent false
     window <#> toEventTarget >>= addEventListener keyup   onKeyUpEvent   false
 
-    let keyStates = keyPresses # mapKeyStates # filterRepeats
+    let keyStates = event # mapKeyStates # filterRepeats
 
     subscribe keyStates logShow <#> const unit
 
