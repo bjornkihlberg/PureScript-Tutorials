@@ -32,6 +32,12 @@ main = do
         onKey dispatch e = fromEvent e <#> key # maybe (pure unit) dispatch
 ```
 A lot of stuff at once here but it's not as bas as it seems. The `onKey :: (String -> Effect Unit) -> Event -> Effect Unit` is a little juicy but splitting it up seems to make this example cluttered. `onKey` takes the `push` function and maps the [Event](https://pursuit.purescript.org/packages/purescript-web-events/2.0.1/docs/Web.Event.Internal.Types#t:Event) to the keyboard button value and invokes `push` with it.
+
+Next we wire up the event listeners to be fed the key press events with `addEventListener :: EventType -> EventListener -> Boolean -> EventTarget -> Effect Unit`.
+```purescript
+window <#> toEventTarget >>= addEventListener keydown onKeyDownEvent false
+window <#> toEventTarget >>= addEventListener keyup   onKeyUpEvent   false
+```
 ## Instructions
 ### Setup
 1. Install required packages
