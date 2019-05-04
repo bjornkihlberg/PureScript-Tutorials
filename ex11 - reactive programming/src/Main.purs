@@ -34,8 +34,8 @@ main = do
         onKey :: (String -> Effect Unit) -> Event -> Effect Unit
         onKey dispatch e = fromEvent e <#> key # maybe (pure unit) dispatch
 
-        mapKeyStates :: forall e. IsEvent e => e (Either String String) -> e (Set String)
+        mapKeyStates :: forall e a. IsEvent e => Ord a => e (Either a a) -> e (Set a)
         mapKeyStates e = fold (either delete insert) e empty
 
-        filterRepeats :: forall e. IsEvent e => e (Set String) -> e (Set String)
+        filterRepeats :: forall e a. IsEvent e => Eq a => e a -> e a
         filterRepeats e = withLast e # filter (\{ now, last } -> maybe true (_ /= now) last) <#> _.now
