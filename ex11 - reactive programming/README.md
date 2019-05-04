@@ -72,6 +72,15 @@ where
     filterRepeats :: forall e. IsEvent e => e (Set String) -> e (Set String)
     filterRepeats e = withLast e # filter (\{ now, last } -> maybe true (_ /= now) last) <#> _.now
 ```
+Let's pretend that `mapKeyStates` is an expensive operation. We might want to invoke `filterRepeats` before we map. However if we turn
+```purescript
+let keyStates = event # mapKeyStates # filterRepeats
+```
+into
+```purescript
+let keyStates = event # filterRepeats # mapKeyStates
+```
+the types don't line up. Do we need to do something big to fix this? No we don't. It turns out that in `filterRepeats :: forall e. IsEvent e => e (Set String) -> e (Set String)` there is nothing in the implementation that is the least aware that the contents of the event stream is a `Set`. The `_ /= now` is the only part that requires that whatever the stream contains, it has to support equality checking. If when we code we try to make fewer decision and keep things as general as possible, it makes code easier to refactor.
 ## Instructions
 ### Setup
 1. Install required packages
