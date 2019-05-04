@@ -26,7 +26,7 @@ main = do
     window <#> toEventTarget >>= addEventListener keydown onKeyDownEvent false
     window <#> toEventTarget >>= addEventListener keyup   onKeyUpEvent   false
 
-    let keyStates = event # mapKeyStates # filterRepeats
+    let keyStates = event # filterRepeats # mapKeyStates
 
     subscribe keyStates logShow <#> const unit
 
