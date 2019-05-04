@@ -44,6 +44,10 @@ subscribe event logShow <#> const unit
 ```
 *`const :: forall a b. a -> b -> a` ignores the second argument and always returns the first.*
 The same result could be achieved with the `do` notation but I'm such a massive clever clog I want to "rEdUcE lInEs Of CoDe!!!1!½" like a complete junior n00b beginner.
+
+Running this application will log to the browser console `(Right "a")` when you press the `a` key, for example, and `(Left "a")` when releasing the key. If you hold a button down we get a repeat of that event. That might seem fine but what if you press another button at the same time? Both are fireing one after the other? So how do you know when reacting to an event that the other button is pressed? Or hold one key for a while and then hold another key (thereby holding two down at the same time)? The first key stops firing. Things get a little funky and difficult to reason about.
+
+What we want is a stream of states tracking which buttons are currently pressed. This state could either be a record of all possible keys with booleans or a collection with currently pressed keys like an [Array](https://pursuit.purescript.org/builtins/docs/Prim#t:Array). For this particular problem I think the [Set](https://pursuit.purescript.org/packages/purescript-ordered-collections/1.6.1/docs/Data.Set) type is perfect. It's an collection of unique items with some very useful functions like `member :: forall a. Ord a => a -> Set a -> Boolean` and `subset :: forall a. Ord a => Set a -> Set a -> Boolean`. `member` checks if a value is in the set. `subset` checks if all values in a set is contained in another set. That means you could very easily check if a very particular combination of keys are pressed at once. Very nice and clean!
 ## Instructions
 ### Setup
 1. Install required packages
