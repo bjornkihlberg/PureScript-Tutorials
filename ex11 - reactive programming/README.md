@@ -38,6 +38,12 @@ Next we wire up the event listeners to be fed the key press events with `addEven
 window <#> toEventTarget >>= addEventListener keydown onKeyDownEvent false
 window <#> toEventTarget >>= addEventListener keyup   onKeyUpEvent   false
 ```
+Now we can use `subscribe :: forall r a. Event a -> (a -> Effect r) -> Effect (Effect Unit)` to do stuff based on what's in our event stream. The `Effect (Effect Unit)` part of the signature confused me at first. Why not just use `join :: forall a m. Bind m => m (m a) -> m a` to simplifify it to `Effect Unit`? But it turns out that the inner `Effect Unit` is actually an effect that, when invoked, reverts the subscription to the event. I don't care about that in this demo so I'm going to ignore it.
+```purescript
+subscribe event logShow <#> const unit
+```
+*`const :: forall a b. a -> b -> a` ignores the second argument and always returns the first.*
+The same result could be achieved with the `do` notation but I'm such a massive clever clog I want to "rEdUcE lInEs Of CoDe!!!1!½" like a complete junior n00b beginner.
 ## Instructions
 ### Setup
 1. Install required packages
