@@ -92,7 +92,11 @@ into
 filterRepeats :: forall e a. IsEvent e => Eq a => e a -> e a
 filterRepeats e = withLast e # filter (\{ now, last } -> maybe true (_ /= now) last) <#> _.now
 ```
-allows us to switch the filtering and mapping. Again it may not provide any benefit in our case but it's interesting. We definately want the ability to refactor our code.
+allows us to switch the filtering and mapping. Again it may not provide any benefit in our case but it's interesting. We definately want the ability to refactor our code. We might as well generalize `mapKeyStates :: forall e. IsEvent e => e (Either String String) -> e (Set String)`. Looking at the implementation we see that we don't actually require the contents to be strings. If we generalize them we see that the only requirement from `delete :: forall a. Ord a => a -> Set a -> Set a` is that it implements `Ord`.
+```purescript
+mapKeyStates :: forall e a. IsEvent e => Ord a => e (Either a a) -> e (Set a)
+mapKeyStates e = fold (either delete insert) e empty
+```
 ## Instructions
 ### Setup
 1. Install required packages
