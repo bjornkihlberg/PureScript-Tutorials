@@ -13,6 +13,8 @@ main = do
     pure unit
 ```
 *Note that we haven't told PureScript which types we want to work with. PureScript has a Hindley-Milner type system that infer the types by how we use `event` or `push`. We get the terseness of dynamic languages like Python but high reliability.*
+
+*Further you should notice that this is very similar to [Redux](https://redux.js.org/). Actually, you can implement Redux in PureScript in one or two lines of code.*
 ## Instructions
 ### Setup
 1. Install required packages
