@@ -58,6 +58,20 @@ where
     mapKeyStates e = fold (either delete insert) e empty
 ```
 *Alright cool! When running the application we immediately print `(fromFoldable Nil)` to the browser console. Pressing buttons will print things like `(fromFoldable ("a" :  "d" : "s" : Nil))`.*
+
+We could stop here but there are some further interesting things to look at. Holding buttons will fire multiple consecutive identical states which is useless. If you have a big application reacting to these states, it could get very expensive. We shouldn't do any performance optimizations before we know for sure we need it. I'm going to do it anyway to demonstrate something interesting.
+```purescript
+let keyStates = event # mapKeyStates # filterRepeats
+
+subscribe keyStates logShow <#> const unit
+
+where
+    mapKeyStates :: forall e. IsEvent e => e (Either String String) -> e (Set String)
+    mapKeyStates e = fold (either delete insert) e empty
+
+    filterRepeats :: forall e. IsEvent e => e (Set String) -> e (Set String)
+    filterRepeats e = withLast e # filter (\{ now, last } -> maybe true (_ /= now) last) <#> _.now
+```
 ## Instructions
 ### Setup
 1. Install required packages
