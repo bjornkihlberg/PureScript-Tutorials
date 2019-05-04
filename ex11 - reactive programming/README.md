@@ -2,7 +2,17 @@
 ### Reactiveness
 I've found modelling evolving state as composition of event streams to be intuitive and easy to manage. I do not yet have enough experience with this style of programming to know if it's maintainable or if it scales well.
 
-In this example I'm creating a stream of states tracking which keyboard buttons are pressed down with no successive repeats of the same state. We'll learn some interesting things about PureScript and this style of programming.
+In this example I'm creating a stream of states tracking which keyboard buttons are pressed down with no successive repeats of the same state. We'll learn some interesting things about PureScript and this style of programming along the way.
+
+We start by creating a pair of an event stream and a function that push events onto that stream. To do this we use `create :: forall a. Effect { event :: Event a, push :: a -> Effect Unit }` from the [FRP.Event](https://pursuit.purescript.org/packages/purescript-event/1.2.4/docs/FRP.Event) module.
+```purescript
+main :: Effect Unit
+main = do
+    { event, push } <- create
+
+    pure unit
+```
+*Note that we haven't told PureScript which types we want to work with. PureScript has a Hindley-Milner type system that infer the types by how we use `event` or `push`. We get the terseness of dynamic languages like Python but high reliability.*
 ## Instructions
 ### Setup
 1. Install required packages
