@@ -5,6 +5,7 @@
     "depends": [
         "console",
         "event",
-        "prelude"
+        "prelude",
+        "web-uievents"
     ]
 }
