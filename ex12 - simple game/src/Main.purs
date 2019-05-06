@@ -26,10 +26,10 @@ paintShip ctx turns x y = do
     C.setTransform ctx { m11: 1.0, m12: 0.0, m21: 0.0, m22: 1.0, m31: 0.0, m32: 0.0 }
 
 main :: Effect Unit
-main = do
+main =
     C.getCanvasElementById "mycanvas" >>= maybe
         (log "Couldn't find canvas by id")
-        (\canvas ->  do
+        (\canvas -> do
             { width, height } <- C.getCanvasDimensions canvas
             ctx <- C.getContext2D canvas
             C.clearRect ctx { x: 0.0, y: 0.0, width, height }
